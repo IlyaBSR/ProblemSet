@@ -31,5 +31,18 @@ namespace UnitTests
                 && output.Contains(17) && output.Contains(19) && output.Contains(23));
             Assert.AreEqual(9, output.Count);
         }
+
+        [TestMethod]
+        public void EnumeratePrimesDeuxDP_Basic()
+        {
+            // Act
+            List<int> output = DynamicProblems.EnumerateAllPrimesDeux(25);
+
+            //Assert
+            Assert.IsTrue(output.Contains(2) && output.Contains(3) && output.Contains(5)
+                && output.Contains(7) && output.Contains(11) && output.Contains(13)
+                && output.Contains(17) && output.Contains(19) && output.Contains(23));
+            Assert.AreEqual(9, output.Count);
+        }
     }
 }

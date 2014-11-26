@@ -11,7 +11,7 @@ namespace ProblemSet
     {
         static void Main(string[] args)
         {
-            List<int> output = DynamicProblems.EnumerateAllPrimes(1000);
+            List<int> output = DynamicProblems.EnumerateAllPrimesDeux(100000);
             foreach(int i in output)
             {
                 Console.Write("{0} ", i);

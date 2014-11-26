@@ -83,9 +83,31 @@ namespace ProblemSet
 
             allPrimes[0] = -1;
             allPrimes[1] = -1;
-            allPrimes[2] = 1;
 
-            return new List<int>();
+            int cur = 2;
+
+            while (cur < allPrimes.Length)
+            {
+                allPrimes[cur] = 1;
+
+                for (int i = 2; i * cur < allPrimes.Length; i++)
+                {
+                    allPrimes[cur * i] = -1;
+                }
+
+                while (++cur < allPrimes.Length && allPrimes[cur] != 0) ;
+            }
+
+            List<int> primes = new List<int>();
+
+            for(int i = 0; i < allPrimes.Length; i++) {
+                if (allPrimes[i] == 1) 
+                {
+                    primes.Add(i);
+                }
+            }
+
+            return primes;
         }
     }
 }
