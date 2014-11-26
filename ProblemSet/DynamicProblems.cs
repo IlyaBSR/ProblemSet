@@ -44,9 +44,48 @@ namespace ProblemSet
 
         /* CCI 6.12 Wriate a function that takes a single-positive integer 
          * argument n (n>=2) and return all the primes between 1 and n */
-        private static List<int> EnumerateAllPrimes(int n)
+        public static List<int> EnumerateAllPrimes(int n)
         {
+            if (n < 2)
+            { 
+                return null; 
+            }
 
+            HashSet<int> knownPrimes = new HashSet<int>();
+            knownPrimes.Add(2);
+
+            for (int i = 3; i <= n; i += 2)
+            {
+                bool isPrime = true;
+                foreach (int prime in knownPrimes)
+                {
+                    if (i % prime == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime)
+                {
+                    knownPrimes.Add(i);
+                }
+            }
+
+                return knownPrimes.ToList();
+        }
+
+        public static List<int> EnumerateAllPrimesDeux(int n)
+        {
+            if (n < 2) return null;
+
+            int[] allPrimes = new int[n + 1];
+
+            allPrimes[0] = -1;
+            allPrimes[1] = -1;
+            allPrimes[2] = 1;
+
+            return new List<int>();
         }
     }
 }

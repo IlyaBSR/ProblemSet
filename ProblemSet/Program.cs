@@ -11,8 +11,12 @@ namespace ProblemSet
     {
         static void Main(string[] args)
         {
-            
-
+            List<int> output = DynamicProblems.EnumerateAllPrimes(1000);
+            foreach(int i in output)
+            {
+                Console.Write("{0} ", i);
+            }
+            Console.WriteLine();
         }
     }
 }
