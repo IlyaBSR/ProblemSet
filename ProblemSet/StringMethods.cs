@@ -82,5 +82,44 @@ namespace ProblemSet
             return sb.ToString().Contains(s1);
         }
 
+
+        public static HashSet<string> AllPermutations(string inputString)
+        {
+            HashSet<string> output = new HashSet<string>();
+
+            if (String.IsNullOrEmpty(inputString))
+            {
+                return null;
+            }
+            else if (inputString.Length == 1)
+            {
+                output.Add(inputString);
+            }
+            else if (inputString.Length == 2)
+            {
+                output.Add(inputString);
+                output.Add("" + inputString[1] + inputString[0]);
+            }
+            else
+            {
+                for (int i = 0; i < inputString.Length; i++)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(inputString.Substring(i + 1));
+                    sb.Append(inputString.Substring(0, i));
+                    HashSet<string> permutations = AllPermutations(sb.ToString());
+
+                    foreach (string permutation in permutations)
+                    {
+                        if (!output.Contains(inputString[i] + permutation))
+                        {
+                            output.Add(inputString[i] + permutation);
+                        }
+                    }
+                }
+            }
+
+            return output;
+        }
     }
 }

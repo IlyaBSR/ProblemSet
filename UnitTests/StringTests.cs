@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProblemSet;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -114,6 +115,24 @@ namespace UnitTests
 
             // Assert
             Assert.AreEqual(result, false);
+        }
+
+        [TestMethod]
+        public void AllPermutations_Basic()
+        {
+            // Arrange
+            string input = "abcd";
+
+            // Act
+            HashSet<string> output = StringMethods.AllPermutations(input);
+
+            // Assert
+            Assert.IsTrue(output.Contains("abcd") && output.Contains("abdc") && output.Contains("acbd") 
+                && output.Contains("acdb")
+                && output.Contains("adbc") && output.Contains("adcb"));
+
+            Assert.AreEqual(24, output.Count);
+
         }
     }
 }
