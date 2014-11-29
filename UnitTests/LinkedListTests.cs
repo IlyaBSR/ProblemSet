@@ -30,5 +30,25 @@ namespace UnitTests
             Assert.AreEqual(clean.Next.Next.Next.Data == 3, true);
             Assert.AreEqual(clean.Next.Next.Next.Next.Data == 4, true);
         }
+
+        [TestMethod]
+        public void AddBigIntegers_LLN()
+        {
+            // Act
+            string output = LinkedListMethods.AddBigIntegers("1238", "1238");
+
+            // Assert
+            Assert.AreEqual("2476", output);
+        }
+
+        [TestMethod]
+        public void AddBigIntegers_LLN_Complex()
+        {
+            // Act
+            string output = LinkedListMethods.AddBigIntegers("9238", "1238");
+
+            // Assert
+            Assert.AreEqual("10476", output);
+        }
     }
 }

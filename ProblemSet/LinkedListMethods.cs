@@ -218,6 +218,81 @@ namespace ProblemSet
             return head;
         }
 
+        private static LLNode<int> ConvertStringToLLN(string input)
+        {
+            LLNode<int> newHead = new LLNode<int>(int.Parse(input[input.Length - 1].ToString()));
+            LLNode<int> cur = newHead;
+
+            for (int i = input.Length - 2; i >= 0; i--)
+            {
+                if (input[i] == '-')
+                {
+                    break;
+                }
+
+                LLNode<int> newNode = new LLNode<int>(int.Parse(input[i].ToString()));
+                cur.Next = newNode;
+                cur = newNode;
+            }
+
+            return newHead;
+        }
+
+        public static string AddBigIntegers(string num1, string num2)
+        {
+            // Validate input
+            if (String.IsNullOrEmpty(num1) && string.IsNullOrEmpty(num2))
+            {
+                return string.Empty;
+            }
+            else if (string.IsNullOrEmpty(num1) || string.IsNullOrEmpty(num2))
+            {
+                return string.IsNullOrEmpty(num1) ? num2 : num1;
+            }
+
+            StringBuilder output = new StringBuilder();
+            bool positiveOutput = true;
+
+            // Convert strings to linked lists nodes
+            LLNode<int> num1Head = ConvertStringToLLN(num1);
+            LLNode<int> num2Head = ConvertStringToLLN(num2);
+
+            // Add values
+            LLNode<int> cur2 = num2Head;
+            LLNode<int> cur = num1Head;
+            bool carry = false;
+
+            while (cur != null && cur2 != null)
+            {
+                int value = (cur != null ? cur.Data : 0) + (cur2 != null ? cur2.Data : 0) + (carry ? 1 : 0);
+                if (value > 9)
+                {
+                    carry = true;
+                    value -= 10;
+                }
+                else
+                {
+                    carry = false;
+                }
+                output.Append(value);
+
+                cur = cur.Next;
+                cur2 = cur2.Next;
+            }
+
+            if (carry)
+            {
+                output.Append(1);
+            }
+
+            if (!positiveOutput)
+            {
+                output.Append('-');
+            }
+
+            return StringMethods.ReverseString(output.ToString());
+        }
+
         public static LLNode<int> KToLastElement(LLNode<int> head, int k)
         {
             LLNode<int> curr = head;
