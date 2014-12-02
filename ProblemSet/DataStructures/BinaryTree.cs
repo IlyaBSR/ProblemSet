@@ -33,5 +33,62 @@ namespace ProblemSet.DataStructures
 
             return 0;
         }
+
+        /* Remove nodes not using any additional data structures or recursion */
+        public static bool RemoveTree(ref TreeNode root)
+        {
+            // Validate inputs
+            if (root == null) return false;
+            if (root.Left == null && root.Right == null)
+            {
+                root = null;
+                return true;
+            }
+
+            // Get leftmost Node
+            TreeNode leftmost = LeftMostTreeNode(root);
+
+            // Walk through the tree, every encounter of a right node, append it to the leftmost
+            TreeNode cur = root;
+
+            while (cur != null)
+            {
+                if (cur.Right != null)
+                {
+                    leftmost.Left = cur.Right;
+                    cur.Right = null;
+                    leftmost = LeftMostTreeNode(leftmost);
+                }
+
+                cur = cur.Left;
+            }
+
+            //Walk through the tree from the root and remove nodes along the way
+            cur = root;
+
+            while (cur.Left != null)
+            {
+                TreeNode next = cur.Left;
+                cur = null;
+                cur = next;
+            }
+
+            return true;
+        }
+
+        private static TreeNode LeftMostTreeNode(TreeNode root)
+        {
+            if (root == null) return null;
+            if (root.Left == null) return root;
+
+            TreeNode leftmost = root.Left;
+
+            while (leftmost.Left != null)
+            {
+                leftmost = leftmost.Left;
+            }
+
+            return leftmost;
+        }
     }
 }

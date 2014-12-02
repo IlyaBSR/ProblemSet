@@ -16,6 +16,8 @@ namespace ProblemSet
              1, 2 => 0.5(0) */
         public static string GetRationalDecimal(int num, int den)
         {
+            if (den == 0) throw new DivideByZeroException();
+            
             // using StringBuilder due to constant need to update the output string
             StringBuilder output = new StringBuilder();
             output.Append(num * den >= 0 ? "" : "-");
