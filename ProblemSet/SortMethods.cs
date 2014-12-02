@@ -45,5 +45,52 @@ namespace ProblemSet
             QuickSort(ref input, pivotIndex + 1, end);
         }
 
+        /* Implimentation of bubble sort.  O(N^2) */
+        public static void BubbleSort(ref int[] inputArray)
+        {
+            for (int i = inputArray.Length; i > 0; i-- )
+            {
+                for (int j = 1; j < i; j++)
+                {
+                    if (inputArray[j - 1] > inputArray[j])
+                    {
+                        CommonMethods.Swap(ref inputArray, j - 1, j);
+                    }
+                }
+            }
+        }
+
+        /* Implimentation of selection sort. O(N^2) */
+        public static void SelectionSort(ref int[] inputArray)
+        {
+            for(int i = 0; i < inputArray.Length; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < inputArray.Length; j++)
+                { 
+                    if (inputArray[j] < inputArray[minIndex])
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                CommonMethods.Swap(ref inputArray, minIndex, i);
+            }
+        }
+
+        /* Implimentation of Insertion sort. O(N^2) */
+        public static void InsertionSort(ref int[] inputArray)
+        {
+            for (int i = 1; i < inputArray.Length; i++)
+            {
+                for (int j = i - 1; j >= 0; j--)
+                {
+                    if (inputArray[j] > inputArray[j+1])
+                    {
+                        CommonMethods.Swap(ref inputArray, j, j + 1);
+                    }
+                }
+            }
+        }
     }
 }
