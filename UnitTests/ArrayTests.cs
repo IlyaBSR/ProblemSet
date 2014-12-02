@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProblemSet;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -165,11 +166,25 @@ namespace UnitTests
             // Act
             ArrayMethods.RemoveDuplicatesFromArray(ref input);
 
-            // Arrange
+            // Assert
             for (int i = 1; i < 7; i++)
             {
                 Assert.IsTrue(input[i] != input[i - 1]);
             }
+        }
+
+        [TestMethod]
+        public void NextPermutationBasic()
+        {
+            // Arrange
+            List<int> inputList = new List<int>{1, 0, 3, 2};
+
+            // Act
+            List<int> outputList = ArrayMethods.NextPermutation(inputList);
+
+            // Assert
+            Assert.AreEqual(inputList.Count, outputList.Count);
+            Assert.IsTrue(outputList[0] == 1 && outputList[1] == 2 && outputList[2] == 0 && outputList[3] == 3);
         }
     }
 

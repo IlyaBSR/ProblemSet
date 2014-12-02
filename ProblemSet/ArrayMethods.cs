@@ -214,6 +214,73 @@ namespace ProblemSet
             }
         }
 
+        /* EPI 6.14 Compute next permutation
+         * Given a permutation p represented as a vector, return the vector
+         * corresponding to the next permutation under lexicographic ordering.  
+         * If p is the last perutation, return empty vector. */
+        public static List<int> NextPermutation(List<int> inputList)
+        {
+            // Validate input
+            if (inputList == null) throw new ArgumentNullException();
+            if (inputList.Count < 2)
+            {
+                return inputList;
+            }
+
+            // Iterate from the end to start to find valid digit to pivot from
+            int pivotIndex = -1;
+            for (int i = inputList.Count - 2; i >= 0; i--)
+            {
+                if (inputList[i] < inputList[i+1])
+                {
+                    pivotIndex = i;
+                    break;
+                }
+            }
+
+            // If pivot was not set that means none exists: EX: 4321
+            if (pivotIndex < 0)
+            {
+                return new List<int>();
+            }
+
+            // Find the next larger number after the pivot index
+            int nextLargerIndex = pivotIndex + 1;
+            for (int i = pivotIndex + 2; i < inputList.Count; i++)
+            {
+                if (inputList[i] >= inputList[pivotIndex] + 1 && inputList[i] < inputList[nextLargerIndex])
+                {
+                    nextLargerIndex = i;
+                }
+            }
+
+            // Swap that next larger with location after the pivot index
+            Swap(ref inputList, pivotIndex, nextLargerIndex);
+
+            // Sort the remaining values after pivot index + 1
+            for (int i = pivotIndex + 1; i < inputList.Count; i++)
+            {
+                for (int j = i + 1; j < inputList.Count; j++)
+                {
+                    if (inputList[i] > inputList[j])
+                    {
+                        Swap(ref inputList, i, j);
+                    }
+                }
+            }
+
+            return inputList;
+        }
+
+        private static void Swap(ref List<int> inputList, int index1, int index2)
+        {
+            if (index1 == index2) return;
+
+            int temp = inputList[index1];
+            inputList[index1] = inputList[index2];
+            inputList[index2] = temp;
+        }
+
         private static void Swap(ref int[] input, int index1, int index2)
         {
             if (index1 == index2) return;
