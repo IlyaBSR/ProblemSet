@@ -45,6 +45,109 @@ namespace ProblemSet
             QuickSort(ref input, pivotIndex + 1, end);
         }
 
+        // Merge Sort using lists
+        public static List<int> MergeSort(List<int> inputList)
+        {
+            if (inputList.Count < 2)
+            {
+                return inputList;
+            }
+
+            int middle = inputList.Count / 2;
+
+            List<int> left = new List<int>();
+            List<int> right = new List<int>();
+
+            for(int i = 0; i < middle; i++)
+            {
+                left.Add(inputList[i]);
+            }
+
+            for (int i = middle; i < inputList.Count; i++)
+            {
+                right.Add(inputList[i]);
+            }
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+            return Merge(left, right);
+        }
+
+        public static List<int> Merge(List<int> A, List<int> B)
+        {
+            List<int> output = new List<int>();
+
+            int indexA = 0, indexB = 0;
+
+            while (indexA < A.Count || indexB < B.Count)
+            {
+                if (indexA != A.Count && indexB != B.Count)
+                {
+                    if (A[indexA] < B[indexB])
+                    {
+                        output.Add(A[indexA]);
+                        indexA++;
+                    }
+                    else
+                    {
+                        output.Add(B[indexB]);
+                        indexB++;
+                    }
+                }
+                else if (indexA == A.Count)
+                {
+                    output.Add(B[indexB]);
+                    indexB++;
+                }
+                else
+                {
+                    output.Add(A[indexA]);
+                    indexA++;
+                }
+            }
+
+            return output;
+        }
+
+        /* Implimentatin of Merge using Arrays */
+        public static int[] Merge(int[] A, int[] B)
+        {
+            int[] outputArray = new int[A.Length + B.Length];
+
+            int indexA = 0, indexB = 0;
+
+            while (indexA < A.Length && indexB < B.Length)
+            {
+                if (A[indexA] < B[indexB])
+                {
+                    outputArray[indexA + indexB] = A[indexA];
+                    indexA++;
+                }
+                else
+                {
+                    outputArray[indexA + indexB] = B[indexB];
+                    indexB++;
+                }
+            }
+
+            if (indexA == A.Length)
+            {
+                for( ; indexB < B.Length; indexB++)
+                {
+                    outputArray[indexA + indexB] = B[indexB];
+                }
+            }
+            else
+            {
+                for (; indexA < A.Length; indexA++)
+                {
+                    outputArray[indexA + indexB] = A[indexA];
+                }
+            }
+
+            return outputArray;
+        }
+
         /* Implimentation of bubble sort.  O(N^2) */
         public static void BubbleSort(ref int[] inputArray)
         {
