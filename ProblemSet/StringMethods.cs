@@ -116,19 +116,21 @@ namespace ProblemSet
             }
 
             Stack<char> dStack = new Stack<char>();
-            Dictionary<char, char> delimiterCP = new Dictionary<char, char>();
-            delimiterCP.Add(')','(');
-            delimiterCP.Add('}', '{');
-            delimiterCP.Add(']', '[');
+            Dictionary<char, char> delimiterCP = new Dictionary<char, char>() 
+            {
+                {')', '('},
+                {'}', '{'},
+                {']', '['}
+            };
 
             foreach(char c in inputString)
             {
-                if (c=='(' || c=='{' || c=='[')
+                if (delimiterCP.ContainsValue(c))
                 {
                     dStack.Push(c);
                 }
 
-                else if (c==')' || c=='}' || c==']')
+                else if (delimiterCP.ContainsKey(c))
                 {
                     if (dStack.Count == 0 || delimiterCP[c] != dStack.Pop())
                     {
@@ -140,6 +142,8 @@ namespace ProblemSet
                     return false;
                 }
             }
+
+            if (dStack.Count > 0) return false;
 
             return true;
         }
