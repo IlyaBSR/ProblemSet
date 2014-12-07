@@ -184,5 +184,21 @@ namespace UnitTests
             Assert.IsFalse(output5);
             Assert.IsFalse(output6);
         }
+
+        [TestMethod]
+        public void ReverseWord()
+        {
+            // Arrange
+            string input1 = "Alice likes Bob";
+            string input2 = "  Bob really really is about Alice";
+
+            // Act
+            string output1 = StringMethods.ReverseWords(input1);
+            string output2 = StringMethods.ReverseWords(input2);
+           
+            // Assert
+            Assert.AreEqual("Bob likes Alice", output1);
+            Assert.AreEqual("Alice about is really really Bob  ", output2);
+        }
     }
 }

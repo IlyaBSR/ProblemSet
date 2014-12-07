@@ -148,6 +148,59 @@ namespace ProblemSet
             return true;
         }
 
+        // EPI Reverse words in a sentence
+        public static string ReverseWords(string sentence)
+        {
+            // Check input
+            if(string.IsNullOrEmpty(sentence))
+            {
+                return string.Empty;
+            }
+
+            StringBuilder output = new StringBuilder(sentence);
+
+            // Reverse the entire string
+            ReverseChars(ref output, 0, output.Length);
+
+            // Reverse the words in the reversed sentence to make them unreversed
+            int start = 0;
+            int spaceIndex = 0;
+
+            while(start < output.Length)
+            {
+                while(start < output.Length && output[start] == ' ')
+                {
+                    start++;
+                }
+
+                spaceIndex = start + 1;
+
+                while(spaceIndex < output.Length && output[spaceIndex] != ' ')
+                {
+                    spaceIndex++;
+                }
+
+                ReverseChars(ref output, start, spaceIndex);
+
+                // Move onto next words to reverse
+                start = spaceIndex + 1;
+            }
+
+            return output.ToString();
+        }
+
+        private static void ReverseChars(ref StringBuilder inputChar, int start, int end)
+        {
+            if (start < 0 || end > inputChar.Length) return;
+
+            for (int i = start; i < (start + end) / 2; i++)
+            {
+                char tempChar = inputChar[i];
+                inputChar[i] = inputChar[end - 1 - (i - start)];
+                inputChar[end - 1 - (i - start)] = tempChar;
+            }
+        }
+
         // 1.3 Are strings permutations of each other
         public static bool ArePermutations(string a, string b)
         {
