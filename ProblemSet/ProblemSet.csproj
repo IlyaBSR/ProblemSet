@@ -58,6 +58,7 @@
     <Compile Include="InterviewProblem.cs" />
     <Compile Include="LinkedListMethods.cs" />
     <Compile Include="LLNode.cs" />
+    <Compile Include="MathMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortMethods.cs" />
