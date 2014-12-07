@@ -156,5 +156,33 @@ namespace UnitTests
             Assert.IsFalse(output3);
             Assert.IsTrue(output4);
         }
+
+        [TestMethod]
+        public void HasBalancedDelimiters()
+        {
+            // Arrange
+            string input1 = "(){}";
+            string input2 = "([{}])";
+            string input3 = "({})";
+            string input4 = "([)]";
+            string input5 = "(";
+            string input6 = ")}";
+
+            // Act
+            bool output1 = StringMethods.HasBalancedDelimiters(input1);
+            bool output2 = StringMethods.HasBalancedDelimiters(input2);
+            bool output3 = StringMethods.HasBalancedDelimiters(input3);
+            bool output4 = StringMethods.HasBalancedDelimiters(input4);
+            bool output5 = StringMethods.HasBalancedDelimiters(input5);
+            bool output6 = StringMethods.HasBalancedDelimiters(input6);
+
+            // Assert
+            Assert.IsTrue(output1);
+            Assert.IsTrue(output2);
+            Assert.IsTrue(output3);
+            Assert.IsFalse(output4);
+            Assert.IsFalse(output5);
+            Assert.IsFalse(output6);
+        }
     }
 }

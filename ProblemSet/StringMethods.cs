@@ -102,6 +102,48 @@ namespace ProblemSet
             return false;
         }
 
+        // Check if a string input has balanced delimiter characters
+        public static bool HasBalancedDelimiters(string inputString)
+        {
+            // Check Input
+            if (inputString == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else if (inputString.Length < 2)
+            {
+                return false;
+            }
+
+            Stack<char> dStack = new Stack<char>();
+            Dictionary<char, char> delimiterCP = new Dictionary<char, char>();
+            delimiterCP.Add(')','(');
+            delimiterCP.Add('}', '{');
+            delimiterCP.Add(']', '[');
+
+            foreach(char c in inputString)
+            {
+                if (c=='(' || c=='{' || c=='[')
+                {
+                    dStack.Push(c);
+                }
+
+                else if (c==')' || c=='}' || c==']')
+                {
+                    if (dStack.Count == 0 || delimiterCP[c] != dStack.Pop())
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         // 1.3 Are strings permutations of each other
         public static bool ArePermutations(string a, string b)
         {
