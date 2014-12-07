@@ -134,5 +134,27 @@ namespace UnitTests
             Assert.AreEqual(24, output.Count);
 
         }
+
+        [TestMethod]
+        public void IsPalandromic_basics()
+        {
+            // Arrange
+            string input1 = "A man, a plan, a canal, Panama";
+            string input2 = "Able was I, ere I saw Elba!";
+            string input3 = "Boy am I happy!";
+            string input4 = "_ab_!b@a.";
+            
+            // Act
+            bool output1 = StringMethods.IsPalindromic(input1);
+            bool output2 = StringMethods.IsPalindromic(input2);
+            bool output3 = StringMethods.IsPalindromic(input3);
+            bool output4 = StringMethods.IsPalindromic(input4);
+            
+            // Assert
+            Assert.IsTrue(output1);
+            Assert.IsTrue(output2);
+            Assert.IsFalse(output3);
+            Assert.IsTrue(output4);
+        }
     }
 }

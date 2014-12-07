@@ -45,6 +45,63 @@ namespace ProblemSet
             return sb.ToString();
         }
 
+        // EPI  Are palindromatic if nonalphanumeric characters are removed
+        public static bool IsPalindromic(string inputString)
+        {
+            // Check inputs
+            if (inputString == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else if (inputString.Length < 2)
+            {
+                return true;
+            }
+
+            inputString = inputString.ToLowerInvariant();
+            int left = 0;
+            int right = inputString.Length - 1;
+
+            // When the indexes are either equal or cross each other they have met at the halfway point
+            while (left < right)
+            {
+                // move left index until an alphanumeric character is found
+                while (left < inputString.Length && !IsAlphanumeric(inputString[left]))
+                {
+                    left++;
+                }
+
+                // move right index until an alphanumeric character is found
+                while (right >= 0 && !IsAlphanumeric(inputString[right]))
+                {
+                    right--;
+                }
+
+                // compare the characters, if they do not match we do not have a valid palindrome
+                if (inputString[left] != inputString[right])
+                {
+                    return false;
+                }
+
+                // move on to the next set of characters to compare
+                left++; right--;
+            }
+
+            return true;
+        }
+
+        private static bool IsAlphanumeric(char inputC)
+        {
+            if ((inputC >= 'a' && inputC <= 'z') ||
+                (inputC >= 'A' && inputC <= 'Z') ||
+                (inputC >= '0' && inputC <= '9'))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         // 1.3 Are strings permutations of each other
         public static bool ArePermutations(string a, string b)
         {
