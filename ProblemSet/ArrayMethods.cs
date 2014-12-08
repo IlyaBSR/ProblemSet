@@ -9,6 +9,38 @@ namespace ProblemSet
 {
     public class ArrayMethods
     {
+        // Binary Search implimentation of an already sorted integer array
+        public static bool BinarySearch(int[] inputArray, int k)
+        {
+            if (inputArray == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            int start = 0, end = inputArray.Length - 1;
+            int mid = (start + end) / 2;
+
+            while (start <= end)
+            {
+                if (inputArray[mid] > k)
+                {
+                    end = mid - 1;
+                }
+                else if (inputArray[mid] < k)
+                {
+                    start = mid + 1;
+                }
+                else
+                {
+                    return true;
+                }
+
+                mid = (start + end) / 2;
+            }
+
+            return false;
+        }
+
         /* CCI 11.1
          * You are given sorted arrays A and B, where A has a large enough buffer
          * at the end to hold B. Write a method to sort B into A in sorted order
@@ -270,6 +302,48 @@ namespace ProblemSet
             }
 
             return inputList;
+        }
+
+        // CI 7 In a 2-D matrix, every row is increasingly sorted from left to right
+        // and the last number in each row is not great than the first number of the next row
+        // Impliment a function to check whter a number is in such a matrix or not
+        public static bool MatrixContains(int[,] matrix, int value)
+        {
+            // Check input
+            if (matrix == null) throw new ArgumentNullException();
+
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1);
+
+            int start = 0;
+            int end = rows * cols - 1;
+            int mid = (start + end) / 2;
+
+            while (start <= end)
+            {
+                int midRow = mid / cols;
+                int midCol = mid % cols;
+
+                int v = matrix[midRow, midCol];
+
+                if (v == value)
+                {
+                    return true;
+                }
+
+                if (v < value)
+                {
+                    start = mid + 1;
+                }
+                else
+                {
+                    end = mid - 1;
+                }
+
+                mid = (start + end) / 2;
+            }
+
+            return false;
         }
 
         private static void Swap(ref List<int> inputList, int index1, int index2)

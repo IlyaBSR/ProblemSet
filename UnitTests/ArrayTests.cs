@@ -9,6 +9,50 @@ namespace UnitTests
     public class ArrayTests
     {
         [TestMethod]
+        public void BinarySearch()
+        {
+            // Arrange
+            int[] input1 = new int[] { 0, 1, 2, 3, 4, 5 };
+            int[] input2 = new int[] { 0 };
+            int[] input3 = new int[] { 1, 5, 8 };
+            
+            // Act
+            bool output1 = ArrayMethods.BinarySearch(input1, 0);
+            bool output2 = ArrayMethods.BinarySearch(input1, 5);
+            bool output3 = ArrayMethods.BinarySearch(input1, 2);
+            bool output4 = ArrayMethods.BinarySearch(input1, 10);
+            bool output5 = ArrayMethods.BinarySearch(input2, 0);
+            bool output6 = ArrayMethods.BinarySearch(input2, 1);
+            bool output7 = ArrayMethods.BinarySearch(input3, 5);
+
+            // Assert
+            Assert.IsTrue(output1);
+            Assert.IsTrue(output2);
+            Assert.IsTrue(output3);
+            Assert.IsFalse(output4);
+            Assert.IsTrue(output5);
+            Assert.IsFalse(output6);
+            Assert.IsTrue(output7);
+        }
+
+        [TestMethod]
+        public void MatrixContains()
+        {
+            // Arrange
+            int[,] matrix1 = new int[,]
+            {{1,3,5},
+             {7,9, 11},
+             {13, 15, 17}};
+
+            // Act
+            Assert.IsTrue(ArrayMethods.MatrixContains(matrix1, 7));
+            Assert.IsFalse(ArrayMethods.MatrixContains(matrix1, 8));
+            Assert.IsTrue(ArrayMethods.MatrixContains(matrix1, 1));
+            Assert.IsTrue(ArrayMethods.MatrixContains(matrix1, 17));
+           
+        }
+        
+        [TestMethod]
         public void MergeArraysWorked()
         {
             // Arrange
