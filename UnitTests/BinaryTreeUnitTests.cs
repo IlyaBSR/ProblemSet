@@ -48,5 +48,41 @@ namespace UnitTests
             // Assert
             Assert.IsTrue(output);
         }
+
+        [TestMethod]
+        public void IsBST_Valid()
+        {
+            // Arrange
+            TreeNode root = new TreeNode(5);
+            root.Left = new TreeNode(3);
+            root.Left.Left = new TreeNode(1);
+            root.Left.Right = new TreeNode(4);
+            root.Right = new TreeNode(7);
+            root.Right.Right = new TreeNode(8);
+
+            // Act
+            bool output = BinarySearchTree.IsBST(root);
+
+            // Assert
+            Assert.IsTrue(output);
+        }
+
+        [TestMethod]
+        public void IsBST_Invalid()
+        {
+            // Arrange
+            TreeNode root = new TreeNode(5);
+            root.Left = new TreeNode(3);
+            root.Left.Left = new TreeNode(1);
+            root.Left.Right = new TreeNode(4);
+            root.Right = new TreeNode(2);
+            root.Right.Right = new TreeNode(8);
+
+            // Act
+            bool output = BinarySearchTree.IsBST(root);
+
+            // Assert
+            Assert.IsFalse(output);
+        }
     }
 }

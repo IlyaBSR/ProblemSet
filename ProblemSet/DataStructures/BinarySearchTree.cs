@@ -98,8 +98,46 @@ namespace ProblemSet.DataStructures
             }
         }
 
-        
+        /// <summary>
+        /// Validate if passed in Binary root is part of a binary search tree
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static bool IsBST(TreeNode root)
+        {
+            int minValue = int.MinValue;
+            return IsBSTCore(root, ref minValue);
+        }
 
-        
+        /// <summary>
+        /// Helper method for IsBST
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="minValue"></param>
+        /// <returns></returns>
+        private static bool IsBSTCore(TreeNode root, ref int minValue)
+        {
+            // Validate inputs
+            if (root == null)
+            {
+                return true;
+            }
+
+            if (!IsBSTCore(root.Left, ref minValue))
+            {
+                return false;
+            }
+
+            if (root.Data >= minValue)
+            {
+                minValue = root.Data;
+            }
+            else
+            {
+                return false;
+            }
+
+            return IsBSTCore(root.Right, ref minValue);
+        }
     }
 }
