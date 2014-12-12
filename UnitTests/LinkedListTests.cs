@@ -50,5 +50,33 @@ namespace UnitTests
             // Assert
             Assert.AreEqual("10476", output);
         }
+
+        [TestMethod]
+        public void FindEntryNode()
+        {
+            // Arrange
+            LLNode<int> head = new LLNode<int>(1);
+            LLNode<int> curr = head;
+            for (int i = 2; i < 7; i++)
+            {
+                LLNode<int> n = new LLNode<int>(i);
+                curr.Next = n;
+                curr = n;
+            }
+
+            LLNode<int> end = curr;
+            curr = head;
+            for (int i = 0; i < 2; i++)
+            {
+                curr = curr.Next;
+            }
+            end.Next = curr;
+
+            // Act
+            LLNode<int> output = LinkedListMethods.FindEntryNode(head);
+
+            // Assert
+            Assert.AreEqual(curr, output);
+        }
     }
 }

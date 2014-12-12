@@ -127,6 +127,77 @@ namespace ProblemSet
             return false;
         }
 
+        /// <summary>
+        /// Find the entry node of a loop
+        /// </summary>
+        /// <param name="head"></param>
+        public static LLNode<int> FindEntryNode(LLNode<int> head)
+        {
+            // Validate input
+            if (head == null) return null;
+
+            LLNode<int> meetingNode = MeetingNode(head);
+
+            if (meetingNode == null)
+            {
+                return null;
+            }
+
+            // Find how many items in the loop
+            LLNode<int> curr = meetingNode.Next;
+            int loopSize = 1;
+            while (curr != meetingNode)
+            {
+                loopSize++;
+                curr = curr.Next;
+            }
+
+            // Now that we know the loop size move one pointer ahead that many
+            // and when the two meet they are at the entry node
+            LLNode<int> ahead = head;
+            for (int i = 0; i < loopSize; i++)
+            {
+                ahead = ahead.Next;
+            }
+
+            curr = head;
+
+            while(curr != ahead)
+            {
+                curr = curr.Next;
+                ahead = ahead.Next;
+            }
+
+            return curr;
+        }
+
+        /// <summary>
+        /// Gets the meeting point of a loop in a linked list
+        /// </summary>
+        /// <param name="head">head of the linked list</param>
+        /// <returns>Meeting node, if non exists returns null</returns>
+        public static LLNode<int> MeetingNode(LLNode<int> head)
+        {
+            if (head == null) return null;
+
+            LLNode<int> slow = head;
+            LLNode<int> fast = head.Next;
+            while (fast != null && slow != fast)
+            {
+                slow = slow.Next;
+                if (fast.Next == null)
+                {
+                    return null;
+                }
+                fast = fast.Next.Next;
+            }
+
+            if (fast == null) return null;
+
+            // They meet at some point
+            return slow;
+        }
+
         public static bool IsPalindrome(LLNode<int> head)
         {
             Stack<int> stack = new Stack<int>();
