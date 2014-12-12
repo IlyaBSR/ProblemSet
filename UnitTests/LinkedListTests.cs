@@ -73,7 +73,7 @@ namespace UnitTests
             end.Next = curr;
 
             // Act
-            LLNode<int> output = LinkedListMethods.FindEntryNode(head);
+            LLNode<int> output = LinkedListMethods.FindEntryOfLoop(head);
 
             // Assert
             Assert.AreEqual(curr, output);

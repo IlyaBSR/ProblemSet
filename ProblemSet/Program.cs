@@ -11,12 +11,16 @@ namespace ProblemSet
     {
         static void Main(string[] args)
         {
-            List<int> output = DynamicProblems.EnumerateAllPrimesDeux(100000);
-            foreach(int i in output)
+            LLNode<int> head = new LLNode<int>(1);
+            LLNode<int> curr = head;
+            for (int i = 2; i < 7; i++)
             {
-                Console.Write("{0} ", i);
+                LLNode<int> n = new LLNode<int>(i);
+                curr.Next = n;
+                curr = n;
             }
-            Console.WriteLine();
+
+            LinkedListMethods.PrintLinkedListBackwards(head);
         }
     }
 }

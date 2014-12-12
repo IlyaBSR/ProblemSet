@@ -128,10 +128,22 @@ namespace ProblemSet
         }
 
         /// <summary>
+        /// Print the contents of a linked list backwards
+        /// </summary>
+        /// <param name="head">head of linked list</param>
+        public static void PrintLinkedListBackwards(LLNode<int> head)
+        {
+            if (head == null) return;
+
+            PrintLinkedListBackwards(head.Next);
+            Console.WriteLine(head.Data);
+        }
+
+        /// <summary>
         /// Find the entry node of a loop
         /// </summary>
         /// <param name="head"></param>
-        public static LLNode<int> FindEntryNode(LLNode<int> head)
+        public static LLNode<int> FindEntryOfLoop(LLNode<int> head)
         {
             // Validate input
             if (head == null) return null;
