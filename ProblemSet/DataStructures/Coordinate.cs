@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProblemSet.DataStructures
 {
+    /// <summary>
+    /// Provides a way to represent the location on a 2-D matrix using integers
+    /// </summary>
     public struct Coordinate
     {
         public override bool Equals(Object obj) 

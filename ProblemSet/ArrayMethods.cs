@@ -304,9 +304,75 @@ namespace ProblemSet
             return inputList;
         }
 
-        // CI 7 In a 2-D matrix, every row is increasingly sorted from left to right
-        // and the last number in each row is not great than the first number of the next row
-        // Impliment a function to check whter a number is in such a matrix or not
+        /// <summary>
+        /// In a 2-D matrix, every row is increasingly sorted from left to right, and every
+        /// column is increasing sorted from top to bottom. Impliment a function to find all
+        /// coordinates of the passed value
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static List<Coordinate> FindValueInMatrix(int[,] matrix, int value)
+        {
+            // Validate input
+            if (matrix == null) throw new ArgumentNullException("Matrix cannot be null");
+            
+            List<Coordinate> output = new List<Coordinate>();
+
+            int row = 0;
+            int column = matrix.GetLength(1) - 1; // Last column in matrix
+
+            while (row < matrix.GetLength(0) && column >= 0)
+            {
+                if (matrix[row, column] == value)
+                {
+                    int tempX = row;
+                    int tempY = column;
+
+                    while (tempY >= 0 && matrix[tempX, tempY] == value)
+                    {
+                        Coordinate foundLoc = new Coordinate { x = tempX, y = tempY-- };
+                        if (!output.Contains(foundLoc))
+                        {
+                            output.Add(foundLoc);
+                        }
+                    }
+
+                    tempY = column;
+                    tempX++;
+                    while (tempX < matrix.GetLength(0) && matrix[tempX, tempY] == value)
+                    {
+                        Coordinate foundLoc = new Coordinate { x = tempX++, y = tempY };
+                        if (!output.Contains(foundLoc))
+                        {
+                            output.Add(foundLoc);
+                        }
+                    }
+
+                    row++;
+                    column--;
+                }
+                else if (matrix[row, column] > value)
+                {
+                    column--;
+                }
+                else
+                {
+                    row++;
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// CI 7 In a 2-D matrix, every row is increasingly sorted from left to right
+        /// and the last number in each row is not great than the first number of the next row
+        /// Impliment a function to check whter a number is in such a matrix or not
+        /// </summary>
+        /// <param name="matrix">2-D matrix</param>
+        /// <param name="value">Value to verfiy</param>
+        /// <returns></returns>
         public static bool MatrixContains(int[,] matrix, int value)
         {
             // Check input

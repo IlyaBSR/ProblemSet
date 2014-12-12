@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProblemSet;
 using System.Collections.Generic;
+using ProblemSet.DataStructures;
 
 namespace UnitTests
 {
@@ -215,6 +216,24 @@ namespace UnitTests
             {
                 Assert.IsTrue(input[i] != input[i - 1]);
             }
+        }
+
+        [TestMethod]
+        public void FindValueInMatrix()
+        {
+            // Arrange
+            int[,] matrix1 = new int[,]
+            {{1,3,5},
+             {7,9, 11},
+             {7, 15, 17}};
+
+            // Act
+            List<Coordinate> output = ArrayMethods.FindValueInMatrix(matrix1, 7);
+
+            // Assert
+            Assert.AreEqual(2, output.Count);
+            Assert.IsTrue(output.Contains(new Coordinate { x = 1, y = 0 }));
+            Assert.IsTrue(output.Contains(new Coordinate { x = 2, y = 0 }));
         }
 
         [TestMethod]
