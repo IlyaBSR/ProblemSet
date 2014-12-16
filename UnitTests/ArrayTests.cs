@@ -249,6 +249,19 @@ namespace UnitTests
             Assert.AreEqual(inputList.Count, outputList.Count);
             Assert.IsTrue(outputList[0] == 1 && outputList[1] == 2 && outputList[2] == 0 && outputList[3] == 3);
         }
+
+        [TestMethod]
+        public void FindMajority()
+        {
+            // Arrange
+            int[] inputArray = new int[] { 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+
+            // Act
+            int output = ArrayMethods.FindMajority(inputArray);
+
+            // Assert
+            Assert.AreEqual(2, output);
+        }
     }
 
         

@@ -366,6 +366,69 @@ namespace ProblemSet
         }
 
         /// <summary>
+        /// CI 29 - Majority element in an array.  Majority is 
+        /// an element that occurs for more than half the size of the array.
+        /// </summary>
+        /// <param name="inputArray"></param>
+        /// <returns></returns>
+        public static int FindMajority(int[] inputArray)
+        {
+            // Validate Input
+            if (inputArray == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            int majority = inputArray[0];
+            int occured = 1;
+
+            for (int i = 1; i < inputArray.Length; i++)
+            {
+                if (inputArray[i] != majority)
+                {
+                    occured--;
+                    if (occured == 0)
+                    {
+                        majority = inputArray[i];
+                        occured = 1;
+                    }
+                }
+                else
+                {
+                    occured++;
+                }
+            }
+
+            if (!CheckMajority(inputArray,majority))
+            {
+                throw new Exception("No majority exists");
+            }
+
+            return majority;
+        }
+
+        /// <summary>
+        /// Helper method that validates if a given value is the majority
+        /// </summary>
+        /// <param name="inputArray"></param>
+        /// <param name="majority"></param>
+        /// <returns></returns>
+        private static bool CheckMajority(int[] inputArray, int majority)
+        {
+            int result = 0;
+
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                if (inputArray[i] == majority)
+                {
+                    result++;
+                }
+            }
+
+            return result * 2 > inputArray.Length;
+        }
+
+        /// <summary>
         /// CI 7 In a 2-D matrix, every row is increasingly sorted from left to right
         /// and the last number in each row is not great than the first number of the next row
         /// Impliment a function to check whter a number is in such a matrix or not
