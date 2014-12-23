@@ -262,6 +262,21 @@ namespace UnitTests
             // Assert
             Assert.AreEqual(2, output);
         }
+
+        [TestMethod]
+        public void DistanceExists()
+        {
+            // Arrange
+            int[] inputArray = new int[] { 8, 2, 15, 3, 4, 7 };
+
+            // Act
+            bool output1 = ArrayMethods.DistanceExists(inputArray, 8);
+            bool output2 = ArrayMethods.DistanceExists(inputArray, 9);
+
+            // Assert
+            Assert.IsTrue(output1);
+            Assert.IsFalse(output2);
+        }
     }
 
         

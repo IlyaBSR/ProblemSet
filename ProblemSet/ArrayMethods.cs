@@ -366,6 +366,69 @@ namespace ProblemSet
         }
 
         /// <summary>
+        /// Check to see if the integer array contains two 
+        /// numbers with the passed in difference
+        /// </summary>
+        /// <param name="inputArray"></param>
+        /// <param name="diff"></param>
+        /// <returns></returns>
+        public static bool DistanceExists(int[] inputArray, int diff)
+        {
+            if (inputArray == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (inputArray.Length < 2 || diff < 0)
+            {
+                return false;
+            }
+
+            // Sort the input
+            List<int> inputList = new List<int>(inputArray);
+            inputList.Sort();
+            inputArray = inputList.ToArray();
+
+            // Iterate through each value and perform a binary search to find the corresponding number
+            for(int i = 0; i < inputArray.Length - 1; i++)
+            {
+                int numToFind = inputArray[i] + diff;
+                if (BinarySearch(inputArray, numToFind, i))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool BinarySearch(int[] inputArray, int k, int start)
+        {
+            if (inputArray == null) throw new ArgumentNullException();
+            if (start < 0 || inputArray.Length <= start) throw new ArgumentException("start is outside the bounds of inputArray");
+
+            int end = inputArray.Length - 1;
+
+            while (start <= end)
+            {
+                int mid = (start + end) / 2;
+
+                if (inputArray[mid] == k)
+                    return true;
+                else if (inputArray[mid] < k)
+                {
+                    start = mid + 1;
+                }
+                else
+                {
+                    end = mid - 1;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// CI 29 - Majority element in an array.  Majority is 
         /// an element that occurs for more than half the size of the array.
         /// </summary>
